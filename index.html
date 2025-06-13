@@ -11,11 +11,24 @@
 
 </head>
 <body>
+  <audio id="bg-music" src="music.mp3" loop></audio>
+<button onclick="toggleMusic()" id="music-btn">🎵 Toggle Music</button>
+
   <section class="hero">
     <h1>Hi, I'm Shivangi</h1>
     <p>Dreamer • Coder • Artist</p>
     <a href="#about" class="scroll">↓ Scroll Down</a>
   </section>
+
+  <section id="gallery" data-aos="fade-up">
+  <h2>My Art Gallery</h2>
+  <div class="gallery-container">
+    <img src="art1.jpg" alt="Art 1" />
+    <img src="art2.jpg" alt="Art 2" />
+    <img src="art3.jpg" alt="Art 3" />
+  </div>
+</section>
+
 
   <section id="about" data-aos="fade-up">
     <section id="projects" data-aos="fade-up>
@@ -41,6 +54,40 @@
   <script>
   AOS.init();
 </script>
+
+  <script>
+  const music = document.getElementById("bg-music");
+  let isPlaying = false;
+  function toggleMusic() {
+    isPlaying ? music.pause() : music.play();
+    isPlaying = !isPlaying;
+  }
+</script>
+
+  <div class="chatbot">
+  <div class="chat-header">ShiviBot 💬</div>
+  <div class="chat-messages" id="messages"></div>
+  <input type="text" id="userInput" placeholder="Ask me anything..." onkeypress="sendMessage(event)" />
+</div>
+
+<script>
+  function sendMessage(e) {
+    if (e.key === "Enter") {
+      let msg = document.getElementById("userInput").value;
+      let messages = document.getElementById("messages");
+      let userMsg = `<div><strong>You:</strong> ${msg}</div>`;
+      let botReply = `<div><strong>ShiviBot:</strong> ${
+        msg.toLowerCase().includes("hello") ? "Hi Shivangi 💕!" :
+        msg.toLowerCase().includes("french") ? "Je parle un peu français!" :
+        "I'm still learning. But I love you for coding me! 🖤"
+      }</div>`;
+      messages.innerHTML += userMsg + botReply;
+      document.getElementById("userInput").value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+</script>
+
 
 </body>
 </html>
