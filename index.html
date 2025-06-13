@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shivangi | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Smooth Scroll + Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </head>
 <body>
   <section class="hero">
@@ -13,8 +17,8 @@
     <a href="#about" class="scroll">↓ Scroll Down</a>
   </section>
 
-  <section id="about">
-    <section id="projects">
+  <section id="about" data-aos="fade-up">
+    <section id="projects" data-aos="fade-up>
   <h2>My Projects</h2>
   <div class="projects-container">
     <div class="project-card">
@@ -34,5 +38,9 @@
     <h2>About Me</h2>
     <p>Hi! I'm Shivangi — passionate about coding, art, AI, and learning languages like French.</p>
   </section>
+  <script>
+  AOS.init();
+</script>
+
 </body>
 </html>
