@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivangi | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+
+<body>
+  <!-- Background Music -->
+  <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-dreams.mp3" loop></audio>
+  <button onclick="toggleMusic()" id="music-btn">🎵 Toggle Music</button>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hi, I'm Shivangi</h1>
+    <p>Dreamer • Coder • Artist</p>
+    <a href="#about" class="scroll">↓ Scroll Down</a>
+  </section>
+
+  <!-- Art Gallery -->
+  <section id="gallery" data-aos="fade-up">
+    <h2>My Art Gallery</h2>
+    <div class="gallery-container">
+      <img src="https://source.unsplash.com/200x200/?art,painting" alt="Artwork 1">
+      <img src="https://source.unsplash.com/200x200/?art,drawing" alt="Artwork 2">
+      <img src="https://source.unsplash.com/200x200/?watercolor,art" alt="Artwork 3">
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section id="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>Hi! I'm Shivangi — passionate about coding, art, AI, and learning languages like French.</p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" data-aos="fade-up">
+    <h2>My Projects</h2>
+    <div class="projects-container">
+      <div class="project-card">
+        <h3>AI Chatbot</h3>
+        <p>A smart chatbot I built using HTML, CSS & JavaScript.</p>
+        <a href="https://github.com/Shivangi-aes/ai-chatbot" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>To-Do App</h3>
+        <p>A beautiful task manager to track my goals.</p>
+        <a href="https://github.com/Shivangi-aes/todo-app" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot -->
+  <div class="chatbot" data-aos="fade-up">
+    <div class="chat-header">ShiviBot 💬</div>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    AOS.init();
+    const music = document.getElementById("bg-music");
+    let isPlaying = false;
+    function toggleMusic() {
+      isPlaying ? music.pause() : music.play();
+      isPlaying = !isPlaying;
+    }
+
+    document.getElementById("user-input").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
