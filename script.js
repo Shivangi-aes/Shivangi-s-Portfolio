@@ -7,7 +7,7 @@ function toggleMusic() {
   isPlaying = !isPlaying;
 }
 
-// Chatbot Functionality
+// Chatbot
 async function sendMessage(e) {
   if (e.key === "Enter") {
     const input = document.getElementById("userInput");
