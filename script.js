@@ -1,38 +1,35 @@
-function sendMessage() {
-  const inputBox = document.getElementById("user-input");
-  const userInput = inputBox.value.trim();
-  if (!userInput) return;
+let isPlaying = false;
 
-  addMessage("You", userInput);
-
-  fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer YOUR_API_KEY_HERE"
-    },
-    body: JSON.stringify({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: userInput }]
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    const botReply = data.choices?.[0]?.message?.content || "Sorry, I didn't get that.";
-    addMessage("Bot", botReply);
-  })
-  .catch(() => {
-    addMessage("Bot", "Oops! I couldn't connect to the brain right now.");
-  });
-
-  inputBox.value = "";
+// Toggle Music
+function toggleMusic() {
+  const music = document.getElementById("bg-music");
+  isPlaying ? music.pause() : music.play();
+  isPlaying = !isPlaying;
 }
 
-function addMessage(sender, message) {
-  const chatBox = document.getElementById("chat-box");
-  const messageDiv = document.createElement("div");
-  messageDiv.classList.add(sender === "You" ? "user" : "bot");
-  messageDiv.innerText = `${sender}: ${message}`;
-  chatBox.appendChild(messageDiv);
-  chatBox.scrollTop = chatBox.scrollHeight;
+// Chatbot Functionality
+async function sendMessage(e) {
+  if (e.key === "Enter") {
+    const input = document.getElementById("userInput");
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const messages = document.getElementById("messages");
+    messages.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
+    input.value = "";
+
+    try {
+      const res = await fetch("http://localhost:3000/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg }),
+      });
+
+      const data = await res.json();
+      messages.innerHTML += `<div><strong>ShiviBot:</strong> ${data.reply}</div>`;
+      messages.scrollTop = messages.scrollHeight;
+    } catch (err) {
+      messages.innerHTML += `<div><strong>ShiviBot:</strong> Error connecting 😢</div>`;
+    }
+  }
 }
